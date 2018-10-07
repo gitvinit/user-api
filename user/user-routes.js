@@ -1,6 +1,6 @@
 var express = require('express');
 var userRouter = express.Router();
-var userController = require('./user-controller')();//() is important to invoke the function in usercontroller
+var userController = require('./user-controller')();
 
 var routes = function () {
 
