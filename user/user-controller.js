@@ -1,5 +1,5 @@
 var User = require('./user');
-
+var logging = require('../logging');
 var userController = function () {
 
     var addUser = function (req, res) {
@@ -23,7 +23,10 @@ var userController = function () {
 
     var getSingleUser = function (req, res) {
         User.findById(req.params.userId, function (err, user) {
-            if (err) return res.status(500).send("There was a problem finding the user.");
+            if (err) {
+                logging.error("User not found"+req.params.userId, err);
+                return res.status(500).send("There was a problem finding the user.");                
+            }
             if (!user) return res.status(404).send("No user found.");
             res.status(200).send(user);
         });
